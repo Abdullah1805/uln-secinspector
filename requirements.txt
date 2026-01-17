@@ -1,4 +1,0 @@
-streamlit
-aiohttp
-selectolax
-pandas
