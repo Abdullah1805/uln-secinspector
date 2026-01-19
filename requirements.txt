@@ -1,6 +1,0 @@
-streamlit>=1.29
-aiohttp>=3.9
-numpy>=1.26
-matplotlib>=3.8
-beautifulsoup4>=4.12
-reportlab>=4.0
