@@ -4,6 +4,7 @@ from __future__ import annotations
 # F16 – Research Edition
 # SECTION 1: Core Constants, Types & Defensive Utilities
 # ============================================================
+import random
 
 import time
 import uuid
