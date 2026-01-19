@@ -1,7 +1,0 @@
-streamlit
-playwright
-beautifulsoup4
-networkx
-numpy
-scikit-learn
-reportlab
