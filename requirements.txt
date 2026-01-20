@@ -1,0 +1,7 @@
+streamlit
+playwright
+requests
+beautifulsoup4
+dnspython
+numpy
+aiohttp
