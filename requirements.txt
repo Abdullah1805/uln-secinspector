@@ -1,6 +1,0 @@
-streamlit
-aiohttp
-beautifulsoup4
-pandas
-matplotlib
-lxml
